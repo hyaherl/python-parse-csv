@@ -7,6 +7,7 @@ RUN mkdir -p /curate/output
 
 WORKDIR /curate
 COPY ./curate.sh .
+COPY ./env.sh .
 COPY ./parseCsvToJson.py .
 
 CMD ["/bin/sh", "-c", "/bin/bash"]
