@@ -1,12 +1,13 @@
 import pandas as pd
 import numpy as np
+import glob
 import sys
 import json
 
-# input_file_path = './input/raw_test.csv'
-# output_file_path = './output/metadata/metadata.json'
+# input_dir_path = './input'
+# output_file_path = './output/metadata/dm.json'
 
-input_file_path = sys.argv[1]
+input_dir_path = sys.argv[1]
 output_file_path = sys.argv[2]
 
 class NpEncoder(json.JSONEncoder):
@@ -29,6 +30,11 @@ def createColumnObj(column, type, count, nullCount, max, min, mean):
         "min": min,
         "mean": mean,
     }
+
+file_list = glob.glob(input_dir_path + "/*")
+file_list_csv = [file for file in file_list if file.endswith(".csv")]
+
+input_file_path = file_list_csv[0]
 
 df = pd.read_csv(input_file_path)
 
