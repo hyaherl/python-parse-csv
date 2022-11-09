@@ -20,7 +20,7 @@ class NpEncoder(json.JSONEncoder):
             return obj.tolist()
         return super(NpEncoder, self).default(obj)
 
-def createColumnObj(column, type, count, nullCount, max, min, mean):
+def createNumberColumnObj(column, type, count, nullCount, max, min, mean):
     return {
         "column": column,   
         "type": type,
@@ -29,6 +29,14 @@ def createColumnObj(column, type, count, nullCount, max, min, mean):
         "max": max,
         "min": min,
         "mean": mean,
+    }
+
+def createStringColumnObj(column, type, count, nullCount):
+    return {
+        "column": column,   
+        "type": type,
+        "count": count,
+        "nullCount": nullCount,
     }
 
 file_list = glob.glob(input_dir_path + "/*")
@@ -50,15 +58,13 @@ for column in columns:
     count = df[column].count()
     nullCount = rowSize - df[column].count()
 
-    max = None
-    min = None
-    mean = None
     if type != "string":
         max = df[column].max()
         min = df[column].min()
         mean = df[column].mean()
-        
-    columnList.append(createColumnObj(column, type, count, nullCount, max, min, mean));
+        columnList.append(createNumberColumnObj(column, type, count, nullCount, max, min, mean));
+    else:
+        columnList.append(createStringColumnObj(column, type, count, nullCount));
 
 metadata = {
     "columns": columnList,
