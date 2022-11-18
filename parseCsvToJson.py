@@ -4,11 +4,11 @@ import glob
 import sys
 import json
 
-# input_dir_path = './input'
-# output_file_path = './output/metadata/dm.json'
+input_dir_path = './input'
+output_file_path = './output/metadata/dm.json'
 
-input_dir_path = sys.argv[1]
-output_file_path = sys.argv[2]
+# input_dir_path = sys.argv[1]
+# output_file_path = sys.argv[2]
 
 class NpEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -35,15 +35,17 @@ def createNumberColumnObj(column, type, valid, missing, mean, std, min, quantile
         "max": max,
     }
 
-def createStringColumnObj(column, type, valid, missing, unique, mode, modeCnt):
+def createStringColumnObj(column, type, valid, missing, unique, modeFirst, modeFirstCnt, modeSecond, modeSecondCnt):
     return {
         "name": column,  
         "type": type,  
         "valid": valid,
         "missing": missing,
         "unique": unique,
-        "mode": mode,
-        "modeCnt": modeCnt,
+        "modeFirst": modeFirst,
+        "modeFirstCnt": modeFirstCnt,
+        "modeSecond": modeSecond,
+        "modeSecondCnt": modeSecondCnt,
     }
 
 def createBoolColumnObj(column, type, valid, missing, true, false):
@@ -94,17 +96,30 @@ for column in columns:
 
     if type == "object":
         unique = df[column].nunique()
-        mode = df[column].value_counts().idxmax()
-        modeCnt = df[column].value_counts()[0]
-        columnList.append(createStringColumnObj(column, type, valid, missing, unique, mode, modeCnt))
+        ser = df[column].value_counts(dropna=False)
+        modeFirst = ser.idxmax()
+        modeFirstCnt = ser[modeFirst]
+        if pd.isna(modeFirst):
+            modeFirst = '[null]'
+        
+        if unique != 1:
+            modeSecond = ser.index[1]
+            modeSecondCnt = ser[modeSecond]
+        else:
+            modeSecond = None
+            modeSecondCnt = None
+
+        columnList.append(createStringColumnObj(column, type, valid, missing, unique, modeFirst, modeFirstCnt, modeSecond, modeSecondCnt))
     elif type == "date":
         min = df[column].min().strftime("%m/%d/%Y")
         mean = df[column].mean().strftime("%m/%d/%Y")
         max = df[column].max().strftime("%m/%d/%Y")
+
         columnList.append(createDateColumnObj(column, type, valid, missing, min, mean, max))
     elif type == "bool":
         true = df[column].value_counts()[True]
         false = df[column].value_counts()[False]
+
         columnList.append(createBoolColumnObj(column, type, valid, missing, true, false))
     else:
         mean = df[column].mean()
@@ -114,6 +129,7 @@ for column in columns:
         median = df[column].median()
         quantile75 = df[column].quantile(0.75)
         max = df[column].max()
+
         columnList.append(createNumberColumnObj(column, type, valid, missing, mean, std, min, quantile25, median, quantile75, max))
 
 metadata = {

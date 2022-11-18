@@ -1,1 +1,102 @@
-{"columns": [{"name": "UniqueID", "type": "int64", "valid": 22663, "missing": 0, "mean": 5715.036667696245, "std": 3354.2783694263508, "min": 1, "quantile25": 2833.5, "median": 5666.0, "quantile75": 8499.0, "max": 12383}, {"name": "DateOfBite", "type": "date", "valid": 22663, "missing": 0, "min": "01/01/2015", "mean": "05/14/2018", "max": "12/31/2021"}, {"name": "Species", "type": "object", "valid": 22663, "missing": 0, "unique": 1, "mode": "DOG", "modeCnt": 22663}, {"name": "Breed", "type": "object", "valid": 20445, "missing": 2218, "unique": 1651, "mode": "Pit Bull", "modeCnt": 4004}, {"name": "Age", "type": "object", "valid": 11442, "missing": 11221, "unique": 228, "mode": "2", "modeCnt": 1624}, {"name": "Gender", "type": "object", "valid": 22663, "missing": 0, "unique": 3, "mode": "U", "modeCnt": 10535}, {"name": "SpayNeuter", "type": "bool", "valid": 22663, "missing": 0, "true": 5876, "false": 16787}, {"name": "Borough", "type": "object", "valid": 22663, "missing": 0, "unique": 6, "mode": "Queens", "modeCnt": 5773}, {"name": "ZipCode", "type": "object", "valid": 16805, "missing": 5858, "unique": 519, "mode": "10029", "modeCnt": 369}], "rowSize": 22663, "columnSize": 9}
+{
+    "columns": [
+        {
+            "name": "UniqueID",
+            "type": "int64",
+            "valid": 22663,
+            "missing": 0,
+            "mean": 5715.036667696245,
+            "std": 3354.2783694263508,
+            "min": 1,
+            "quantile25": 2833.5,
+            "median": 5666.0,
+            "quantile75": 8499.0,
+            "max": 12383
+        },
+        {
+            "name": "DateOfBite",
+            "type": "date",
+            "valid": 22663,
+            "missing": 0,
+            "min": "01/01/2015",
+            "mean": "05/14/2018",
+            "max": "12/31/2021"
+        },
+        {
+            "name": "Species",
+            "type": "object",
+            "valid": 22663,
+            "missing": 0,
+            "unique": 1,
+            "modeFirst": "DOG",
+            "modeFirstCnt": 22663,
+            "modeSecond": null,
+            "modeSecondCnt": null
+        },
+        {
+            "name": "Breed",
+            "type": "object",
+            "valid": 20445,
+            "missing": 2218,
+            "unique": 1651,
+            "modeFirst": "Pit Bull",
+            "modeFirstCnt": 4004,
+            "modeSecond": "UNKNOWN",
+            "modeSecondCnt": 2349
+        },
+        {
+            "name": "Age",
+            "type": "object",
+            "valid": 11442,
+            "missing": 11221,
+            "unique": 228,
+            "modeFirst": "[null]",
+            "modeFirstCnt": 11221,
+            "modeSecond": "2",
+            "modeSecondCnt": 1624
+        },
+        {
+            "name": "Gender",
+            "type": "object",
+            "valid": 22663,
+            "missing": 0,
+            "unique": 3,
+            "modeFirst": "U",
+            "modeFirstCnt": 10535,
+            "modeSecond": "M",
+            "modeSecondCnt": 8739
+        },
+        {
+            "name": "SpayNeuter",
+            "type": "bool",
+            "valid": 22663,
+            "missing": 0,
+            "true": 5876,
+            "false": 16787
+        },
+        {
+            "name": "Borough",
+            "type": "object",
+            "valid": 22663,
+            "missing": 0,
+            "unique": 6,
+            "modeFirst": "Queens",
+            "modeFirstCnt": 5773,
+            "modeSecond": "Manhattan",
+            "modeSecondCnt": 5270
+        },
+        {
+            "name": "ZipCode",
+            "type": "object",
+            "valid": 16805,
+            "missing": 5858,
+            "unique": 519,
+            "modeFirst": "[null]",
+            "modeFirstCnt": 5858,
+            "modeSecond": "10029",
+            "modeSecondCnt": 369
+        }
+    ],
+    "rowSize": 22663,
+    "columnSize": 9
+}
