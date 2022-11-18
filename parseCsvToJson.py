@@ -20,23 +20,51 @@ class NpEncoder(json.JSONEncoder):
             return obj.tolist()
         return super(NpEncoder, self).default(obj)
 
-def createNumberColumnObj(column, type, count, nullCount, max, min, mean):
+def createNumberColumnObj(column, type, valid, missing, mean, std, min, quantile25, median, quantile75, max):
     return {
-        "column": column,   
+        "name": column,
         "type": type,
-        "count": count,
-        "nullCount": nullCount,
-        "max": max,
-        "min": min,
+        "valid": valid,
+        "missing": missing,
         "mean": mean,
+        "std": std,
+        "min": min,
+        "quantile25": quantile25,
+        "median": median,
+        "quantile75": quantile75,
+        "max": max,
     }
 
-def createStringColumnObj(column, type, count, nullCount):
+def createStringColumnObj(column, type, valid, missing, unique, mode, modeCnt):
     return {
-        "column": column,   
-        "type": type,
-        "count": count,
-        "nullCount": nullCount,
+        "name": column,  
+        "type": type,  
+        "valid": valid,
+        "missing": missing,
+        "unique": unique,
+        "mode": mode,
+        "modeCnt": modeCnt,
+    }
+
+def createBoolColumnObj(column, type, valid, missing, true, false):
+    return {
+        "name": column,  
+        "type": type,  
+        "valid": valid,
+        "missing": missing,
+        "true": true,
+        "false": false,
+    }
+
+def createDateColumnObj(column, type, valid, missing, min, mean, max):
+    return {
+        "name": column,  
+        "type": type,  
+        "valid": valid,
+        "missing": missing,
+        "min": min,
+        "mean": mean,
+        "max": max,
     }
 
 file_list = glob.glob(input_dir_path + "/*")
@@ -53,18 +81,40 @@ columnList = []
 
 for column in columns:
     type = df.dtypes[column].name
-    if type == "object":
-        type = "string"
-    count = df[column].count()
-    nullCount = rowSize - df[column].count()
 
-    if type != "string":
-        max = df[column].max()
-        min = df[column].min()
-        mean = df[column].mean()
-        columnList.append(createNumberColumnObj(column, type, count, nullCount, max, min, mean));
+    if type == 'object':
+        try:
+            df[column] = pd.to_datetime(df[column])
+            type = 'date'
+        except ValueError:
+            pass
+    
+    valid = df[column].count()
+    missing = df[column].isnull().sum()
+
+    if type == "object":
+        unique = df[column].nunique()
+        mode = df[column].value_counts().idxmax()
+        modeCnt = df[column].value_counts()[0]
+        columnList.append(createStringColumnObj(column, type, valid, missing, unique, mode, modeCnt))
+    elif type == "date":
+        min = df[column].min().strftime("%m/%d/%Y")
+        mean = df[column].mean().strftime("%m/%d/%Y")
+        max = df[column].max().strftime("%m/%d/%Y")
+        columnList.append(createDateColumnObj(column, type, valid, missing, min, mean, max))
+    elif type == "bool":
+        true = df[column].value_counts()[True]
+        false = df[column].value_counts()[False]
+        columnList.append(createBoolColumnObj(column, type, valid, missing, true, false))
     else:
-        columnList.append(createStringColumnObj(column, type, count, nullCount));
+        mean = df[column].mean()
+        std = df[column].std()
+        min = df[column].min()
+        quantile25 = df[column].quantile(0.25)
+        median = df[column].median()
+        quantile75 = df[column].quantile(0.75)
+        max = df[column].max()
+        columnList.append(createNumberColumnObj(column, type, valid, missing, mean, std, min, quantile25, median, quantile75, max))
 
 metadata = {
     "columns": columnList,
