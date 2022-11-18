@@ -106,8 +106,8 @@ for column in columns:
             modeSecond = ser.index[1]
             modeSecondCnt = ser[modeSecond]
         else:
-            modeSecond = None
-            modeSecondCnt = None
+            modeSecond = 0
+            modeSecondCnt = 0
 
         columnList.append(createStringColumnObj(column, type, valid, missing, unique, modeFirst, modeFirstCnt, modeSecond, modeSecondCnt))
     elif type == "date":
