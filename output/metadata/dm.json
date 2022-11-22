@@ -11,16 +11,40 @@
             "quantile25": 2833.5,
             "median": 5666.0,
             "quantile75": 8499.0,
-            "max": 12383
+            "max": 12383,
+            "rangeCount": [
+                2478,
+                2476,
+                2476,
+                2476,
+                2478,
+                2476,
+                2476,
+                2476,
+                1612,
+                1239
+            ]
         },
         {
             "name": "DateOfBite",
             "type": "date",
             "valid": 22663,
             "missing": 0,
-            "min": "01/01/2015",
-            "mean": "05/14/2018",
-            "max": "12/31/2021"
+            "min": "2015/01/01",
+            "mean": "2018/05/14",
+            "max": "2021/12/31",
+            "rangeCount": [
+                2578,
+                2215,
+                2228,
+                2648,
+                2309,
+                2199,
+                2718,
+                1758,
+                1801,
+                2209
+            ]
         },
         {
             "name": "Species",
@@ -30,8 +54,8 @@
             "unique": 1,
             "modeFirst": "DOG",
             "modeFirstCnt": 22663,
-            "modeSecond": null,
-            "modeSecondCnt": null
+            "modeSecond": 0,
+            "modeSecondCnt": 0
         },
         {
             "name": "Breed",
