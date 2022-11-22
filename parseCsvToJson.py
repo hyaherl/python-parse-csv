@@ -4,11 +4,11 @@ import glob
 import sys
 import json
 
-input_dir_path = './input'
-output_file_path = './output/metadata/dm.json'
+# input_dir_path = './input'
+# output_file_path = './output/metadata/dm.json'
 
-# input_dir_path = sys.argv[1]
-# output_file_path = sys.argv[2]
+input_dir_path = sys.argv[1]
+output_file_path = sys.argv[2]
 
 class NpEncoder(json.JSONEncoder):
     def default(self, obj):
