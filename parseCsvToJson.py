@@ -96,6 +96,10 @@ for column in columns:
     valid = df[column].count()
     missing = df[column].isnull().sum()
 
+    isEmpty = df[column].notnull().sum() == 0
+    if isEmpty:
+        type = "object"
+
     if type == "object":
         unique = df[column].nunique()
         ser = df[column].value_counts(dropna=False)
@@ -104,7 +108,7 @@ for column in columns:
         if pd.isna(modeFirst):
             modeFirst = '[null]'
 
-        if unique != 1:
+        if unique > 1:
             modeSecond = ser.index[1]
             modeSecondCnt = ser[modeSecond]
         else:

@@ -1,126 +1,78 @@
 {
-    "columns": [
-        {
-            "name": "UniqueID",
-            "type": "int64",
-            "valid": 22663,
-            "missing": 0,
-            "mean": 5715.036667696245,
-            "std": 3354.2783694263508,
-            "min": 1,
-            "quantile25": 2833.5,
-            "median": 5666.0,
-            "quantile75": 8499.0,
-            "max": 12383,
-            "rangeCount": [
-                2478,
-                2476,
-                2476,
-                2476,
-                2478,
-                2476,
-                2476,
-                2476,
-                1612,
-                1239
-            ]
-        },
-        {
-            "name": "DateOfBite",
-            "type": "date",
-            "valid": 22663,
-            "missing": 0,
-            "min": "2015/01/01",
-            "mean": "2018/05/14",
-            "max": "2021/12/31",
-            "rangeCount": [
-                2578,
-                2215,
-                2228,
-                2648,
-                2309,
-                2199,
-                2718,
-                1758,
-                1801,
-                2209
-            ]
-        },
-        {
-            "name": "Species",
-            "type": "object",
-            "valid": 22663,
-            "missing": 0,
-            "unique": 1,
-            "modeFirst": "DOG",
-            "modeFirstCnt": 22663,
-            "modeSecond": 0,
-            "modeSecondCnt": 0
-        },
-        {
-            "name": "Breed",
-            "type": "object",
-            "valid": 20445,
-            "missing": 2218,
-            "unique": 1651,
-            "modeFirst": "Pit Bull",
-            "modeFirstCnt": 4004,
-            "modeSecond": "UNKNOWN",
-            "modeSecondCnt": 2349
-        },
-        {
-            "name": "Age",
-            "type": "object",
-            "valid": 11442,
-            "missing": 11221,
-            "unique": 228,
-            "modeFirst": "[null]",
-            "modeFirstCnt": 11221,
-            "modeSecond": "2",
-            "modeSecondCnt": 1624
-        },
-        {
-            "name": "Gender",
-            "type": "object",
-            "valid": 22663,
-            "missing": 0,
-            "unique": 3,
-            "modeFirst": "U",
-            "modeFirstCnt": 10535,
-            "modeSecond": "M",
-            "modeSecondCnt": 8739
-        },
-        {
-            "name": "SpayNeuter",
-            "type": "bool",
-            "valid": 22663,
-            "missing": 0,
-            "true": 5876,
-            "false": 16787
-        },
-        {
-            "name": "Borough",
-            "type": "object",
-            "valid": 22663,
-            "missing": 0,
-            "unique": 6,
-            "modeFirst": "Queens",
-            "modeFirstCnt": 5773,
-            "modeSecond": "Manhattan",
-            "modeSecondCnt": 5270
-        },
-        {
-            "name": "ZipCode",
-            "type": "object",
-            "valid": 16805,
-            "missing": 5858,
-            "unique": 519,
-            "modeFirst": "[null]",
-            "modeFirstCnt": 5858,
-            "modeSecond": "10029",
-            "modeSecondCnt": 369
-        }
-    ],
-    "rowSize": 22663,
-    "columnSize": 9
+  "columns": [
+    {
+      "name": "Entity",
+      "type": "object",
+      "valid": 147,
+      "missing": 0,
+      "unique": 7,
+      "modeFirst": "Asian marker price (BP)",
+      "modeFirstCnt": 21,
+      "modeSecond": "China Qinhuangdao spot price (BP)",
+      "modeSecondCnt": 21
+    },
+    {
+      "name": "Code",
+      "type": "object",
+      "valid": 0,
+      "missing": 147,
+      "unique": 0,
+      "modeFirst": "[null]",
+      "modeFirstCnt": 147,
+      "modeSecond": 0,
+      "modeSecondCnt": 0
+    },
+    {
+      "name": "Year",
+      "type": "int64",
+      "valid": 147,
+      "missing": 0,
+      "mean": 2011.0,
+      "std": 6.07600265134719,
+      "min": 2001,
+      "quantile25": 2006.0,
+      "median": 2011.0,
+      "quantile75": 2016.0,
+      "max": 2021,
+      "rangeCount": [
+        21,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14
+      ]
+    },
+    {
+      "name": "Coal - Prices",
+      "type": "float64",
+      "valid": 147,
+      "missing": 0,
+      "mean": 85.34311969264024,
+      "std": 37.333558088118664,
+      "min": 30.406665802001957,
+      "quantile25": 60.63692092895508,
+      "median": 79.47000122070312,
+      "quantile75": 106.95708465576172,
+      "max": 229.1233367919922,
+      "rangeCount": [
+        25,
+        34,
+        31,
+        23,
+        15,
+        9,
+        7,
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "rowSize": 147,
+  "columnSize": 4
 }
